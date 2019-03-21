@@ -6,7 +6,7 @@ app.post('/hello', (req, res) => {
   res.status(200).send({
     success: 'true',
     message: 'todos retrieved successfully',
-    data: 'Hello kind'
+    data: 'Hello kind',
   })
 })
 const PORT = 5000
