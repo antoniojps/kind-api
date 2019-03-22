@@ -9,7 +9,8 @@
     "dev": "nodemon --exec babel-node src/server.js",
     "build": "cross-env NODE_ENV=production npm run clean && babel src --out-dir build",
     "start": "cross-env NODE_ENV=production node build/server.js",
-    "precommit": "npm run eslint"
+    "precommit": "npm run eslint",
+    "deploy": "now && now alias"
   },
   "husky": {
     "hooks": {

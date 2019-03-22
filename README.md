@@ -9,3 +9,5 @@ Run in dev env `npm run dev`
 Build `npm run build`
 
 Serve `npm run start`
+
+Deploy `npm run deploy`
