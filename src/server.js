@@ -1,10 +1,12 @@
 import express from 'express'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import './config'
 import getKindness from './getKindness'
 
-function setupParsers (app) {
+function setupMiddleware (app) {
   app.use(bodyParser.json())
+  app.use(cors())
 }
 
 function setupRoutes (app) {
@@ -33,7 +35,7 @@ function setupRoutes (app) {
 function setupExpress () {
   const app = express()
 
-  setupParsers(app)
+  setupMiddleware(app)
   setupRoutes(app)
 
   const PORT = process.env.PORT
