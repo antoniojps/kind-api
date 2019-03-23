@@ -20,7 +20,9 @@ function setupRoutes (app) {
 
   app.post('/is', async (req, res) => {
     const { message } = req.body
+
     const kindness = await getKindness(message)
+
     res.status(200).send({
       success: 'true',
       data: kindness,

@@ -1,4 +1,5 @@
 import { getSentiment } from './services/textAnalyticsAPI'
+import { getInsult } from './services/insultAPI'
 
 const scale = {
   insult: {
@@ -23,17 +24,29 @@ const computeKindnessMessage = sentiment => {
   return 'kind'
 }
 
+const computeIsKind = (sentiment, insult) => {
+  if (sentiment < 0.5 && insult === '1') return false
+  return true
+}
+
 /**
  * Returns if a message is kind or not from 0(negative) to 1(positive)
- * @param {String} text the message being sent
+ * @param {String} message the message being sent
  * @returns {Object} kind
  */
 const getKindness = async message => {
   try {
-    const sentimentObj = await getSentiment(message)
-    const sentiment = sentimentObj.data.documents[0].score
+    const insultData = await getInsult(message)
+    const insult = insultData.data.Results.kindness.value.Values[0][3]
+    const sentimentData = await getSentiment(message)
+    const sentiment = sentimentData.data.documents[0].score
+    const isKind = computeIsKind(sentiment, insult)
+
     return {
+      isKind,
+      kindness: isKind ? 1 : 0,
       sentiment,
+      insult,
       message: computeKindnessMessage(sentiment),
     }
   } catch (err) {

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { TEXT_ANALYTICS_API } from './../utils/constants'
+import { INSULT_API } from './../utils/constants'
 
 const handleAxiosError = function (err) {
   if (err.response) {
@@ -16,32 +16,32 @@ const handleAxiosError = function (err) {
 }
 
 // config
-const textAnalyticsAPI = axios.create({
-  baseURL: TEXT_ANALYTICS_API,
+const insultAPI = axios.create({
+  baseURL: INSULT_API,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
-    'Ocp-Apim-Subscription-Key': process.env.TEXT_ANALYTICS_API_KEY,
+    Authorization: `Bearer ${process.env.INSULT_API_KEY}`,
   },
 })
 
-textAnalyticsAPI.interceptors.response.use(r => r, handleAxiosError)
+insultAPI.interceptors.response.use(r => r, handleAxiosError)
 
 /**
- * Returns a numeric score between 0 and 1. Scores close to 1 indicate positive sentiment, while scores close to 0 indicate negative sentiment.
+ * Returns insult
  * @param {String} message the message being sent
  * @returns {Object} kind
  */
-export const getSentiment = async message => {
+export const getInsult = async message => {
   const body = {
-    documents: [
-      {
-        language: 'en',
-        id: '1',
-        text: message,
+    Inputs: {
+      WebInput: {
+        ColumnNames: ['chat'],
+        Values: [[message]],
       },
-    ],
+    },
+    GlobalParameters: {},
   }
-  return textAnalyticsAPI.post('/sentiment', body)
+  return insultAPI.post('/execute?api-version=2.0&details=true', body)
 }
