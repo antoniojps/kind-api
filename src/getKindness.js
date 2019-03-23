@@ -36,9 +36,12 @@ const computeIsKind = (sentiment, insult) => {
  */
 const getKindness = async message => {
   try {
-    const insultData = await getInsult(message)
+    const [insultData, sentimentData] = await Promise.all([
+      getInsult(message),
+      getSentiment(message),
+    ])
+
     const insult = insultData.data.Results.kindness.value.Values[0][3]
-    const sentimentData = await getSentiment(message)
     const sentiment = sentimentData.data.documents[0].score
     const isKind = computeIsKind(sentiment, insult)
 
