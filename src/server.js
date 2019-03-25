@@ -10,10 +10,9 @@ function setupMiddleware (app) {
 }
 
 function setupRoutes (app) {
-  app.post('/hello', (req, res) => {
+  app.get('/hello', (req, res) => {
     res.status(200).send({
       success: 'true',
-      message: 'todos retrieved successfully',
       data: 'Hello kind',
     })
   })
@@ -24,7 +23,7 @@ function setupRoutes (app) {
     const kindness = await getKindness(message)
 
     res.status(200).send({
-      success: 'true',
+      success: true,
       data: kindness,
     })
   })
