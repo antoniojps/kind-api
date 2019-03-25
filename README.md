@@ -67,6 +67,8 @@ Returns an analysis of the message, the sentiment, kindness and determines if it
   - **Code:** 200 <br />
     **Content:**
 
+    Message: `Hey`
+
     ```json
     {
       "success": "true",
@@ -76,6 +78,21 @@ Returns an analysis of the message, the sentiment, kindness and determines if it
         "sentiment": 0.9869865775108337,
         "insult": "0",
         "message": "kind"
+      }
+    }
+    ```
+
+    Message: `You are dumb`
+
+    ```json
+    {
+      "success": "true",
+      "data": {
+        "isKind": false,
+        "kindness": 0,
+        "sentiment": 0.011714428663253784,
+        "insult": "1",
+        "message": "insult"
       }
     }
     ```
