@@ -18,6 +18,16 @@ This custom service took an input from the Microsoft Text Analytics API aswell t
 
 ![machine-learning](./assets/machine-learning.png)
 
+## The Product
+
+This was intendend to be used for chat rooms where the main audience are children, that's how the product was designed.
+
+**Kind**
+
+![king-logo](./assets/logo.png)
+
+Read all about our [product here](./docs/product.md).
+
 ## Built With
 
 Given the 48 hour time constraint we tried to use the technologies we knew better as a team and that provided out of the box solutions.
